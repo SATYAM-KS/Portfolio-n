@@ -1,7 +1,7 @@
 
 // --- DOCUMENT TITLE ENFORCER ---
 (function enforceDocumentTitle() {
-  const TARGET_TITLE = "Satyam Kumar Singh | Full-Stack & AI Engineer | Portfolio";
+  const TARGET_TITLE = "Satyam Singh | Full-Stack & AI Engineer | Portfolio";
   
   function applyTitle() {
     if (document.title !== TARGET_TITLE) {
