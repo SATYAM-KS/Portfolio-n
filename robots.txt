@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://satyam-ks.github.io/Portfolio-n/sitemap.xml
