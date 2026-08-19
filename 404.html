@@ -6,6 +6,22 @@
 <!-- Published Apr 15, 2026, 2:46 PM UTC -->
 <html lang="en" data-redirect-timezone="1" dir="ltr">
 <head>
+	<script>
+(function(){
+  if(window.location.hash){
+    try{history.replaceState(null,'',window.location.pathname+window.location.search);}catch(e){}
+  }
+  var p=history.pushState,r=history.replaceState;
+  function c(u){return typeof u==='string'?u.split('#')[0]||window.location.pathname:window.location.pathname;}
+  if(p){history.pushState=function(s,t,u){return p.call(this,s,t,c(u));};}
+  if(r){history.replaceState=function(s,t,u){return r.call(this,s,t,c(u));};}
+  if(window.History&&window.History.prototype){
+    if(p)window.History.prototype.pushState=history.pushState;
+    if(r)window.History.prototype.replaceState=history.replaceState;
+  }
+  window.addEventListener('hashchange',function(){if(window.location.hash)history.replaceState(null,'',window.location.pathname+window.location.search);},{passive:true});
+})();
+</script>
 	<meta charset="utf-8">
 	
 	

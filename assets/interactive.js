@@ -1,3 +1,62 @@
+// --- CLEAN URL MANAGER (Strips #contact, #work, etc. from browser address bar) ---
+(function initCleanUrlManager() {
+  function cleanUrl(url) {
+    if (typeof url === 'string') {
+      const clean = url.split('#')[0] || window.location.pathname;
+      return clean;
+    }
+    return window.location.pathname;
+  }
+
+  function stripHashNow() {
+    if (window.location.hash) {
+      try {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      } catch (e) {}
+    }
+  }
+
+  // Strip initial hash
+  stripHashNow();
+
+  // Intercept history.pushState & replaceState
+  ['pushState', 'replaceState'].forEach(method => {
+    const orig = history[method];
+    if (orig) {
+      history[method] = function (state, title, url) {
+        return orig.call(this, state, title, cleanUrl(url));
+      };
+    }
+    if (window.History && window.History.prototype && window.History.prototype[method]) {
+      const origProto = window.History.prototype[method];
+      window.History.prototype[method] = function (state, title, url) {
+        return origProto.call(this, state, title, cleanUrl(url));
+      };
+    }
+  });
+
+  // Watch for any hashchange
+  window.addEventListener('hashchange', stripHashNow, { passive: true });
+  window.addEventListener('popstate', stripHashNow, { passive: true });
+  setInterval(stripHashNow, 400);
+
+  // Smooth scroll without hash mutation on internal link clicks
+  document.addEventListener('click', function (e) {
+    const anchor = e.target.closest('a');
+    if (!anchor) return;
+    const href = anchor.getAttribute('href');
+    if (href && href.startsWith('#') && href.length > 1) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const targetEl = document.getElementById(targetId) || document.querySelector(`[data-framer-name="${targetId}"]`) || document.querySelector(href);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+      stripHashNow();
+    }
+  }, true);
+})();
+
 /**
  * Satyam Singh Portfolio — Interactive Enhancements
  * - Project Image Clickable Links & Permanent State Tracking
