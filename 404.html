@@ -190,6 +190,36 @@
     
     <!-- End of headEnd -->
 <style>.framer-0r8a4.framer-v-2blkby .framer-form-input, .framer-0r8a4.framer-v-xy305u .framer-form-input, .framer-0r8a4.framer-v-9ykynt .framer-form-input, [data-framer-name*="Dark"] .framer-form-input, [data-framer-name*="Dark"] input, [data-framer-name*="Dark"] textarea { color: #ffffff !important; --framer-input-font-color: #ffffff !important; }</style>
+
+<style id="portfolio-no-select-drag">
+  /* Disable text selection and dragging globally */
+  *, *::before, *::after {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    -khtml-user-drag: none !important;
+    -moz-user-drag: none !important;
+    -o-user-drag: none !important;
+    user-drag: none !important;
+    -webkit-touch-callout: none !important;
+  }
+
+  /* Keep input fields and textareas editable and selectable for contact form */
+  input, textarea, [contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+
+  img, a, svg, video {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+  }
+</style>
+
 </head>
 <body>
 	

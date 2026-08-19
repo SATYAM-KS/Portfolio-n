@@ -1,3 +1,21 @@
+
+// --- NO-SELECT & NO-DRAG GUARDS ---
+(function initNoSelectDragGuards() {
+  document.addEventListener('dragstart', function (e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      return false;
+    }
+  }, { capture: true });
+
+  document.addEventListener('selectstart', function (e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      return false;
+    }
+  }, { capture: true });
+})();
+
 // --- CLEAN URL MANAGER (Strips #contact, #work, etc. from browser address bar) ---
 (function initCleanUrlManager() {
   function cleanUrl(url) {
