@@ -1,4 +1,30 @@
 
+// --- DOCUMENT TITLE ENFORCER ---
+(function enforceDocumentTitle() {
+  const TARGET_TITLE = "Satyam Kumar Singh | Full-Stack & AI Engineer | Portfolio";
+  
+  function applyTitle() {
+    if (document.title !== TARGET_TITLE) {
+      document.title = TARGET_TITLE;
+    }
+  }
+
+  applyTitle();
+
+  // Watch title changes via MutationObserver
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(applyTitle);
+    const titleTag = document.querySelector('title') || document.head;
+    if (titleTag) {
+      observer.observe(titleTag, { childList: true, subtree: true, characterData: true });
+    }
+  }
+
+  // Periodic safeguard
+  setInterval(applyTitle, 500);
+})();
+
+
 // --- NO-SELECT & NO-DRAG GUARDS ---
 (function initNoSelectDragGuards() {
   document.addEventListener('dragstart', function (e) {
